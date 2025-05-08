@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Licznik odwiedzin</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f2f2f2;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #licznik {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Witaj na stronie!</h1>
+    <p>Twoja wizyta została zarejestrowana.</p>
+    <div id="licznik">Ładowanie liczby odwiedzających...</div>
+
+    <script>
+        fetch('/licznik')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('licznik').textContent =
+                    `Liczba unikalnych odwiedzających: ${data.liczba}`;
+            })
+            .catch(err => {
+                document.getElementById('licznik').textContent =
+                    'Błąd podczas ładowania danych.';
+            });
+    </script>
+</body>
+</html>
